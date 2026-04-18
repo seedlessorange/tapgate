@@ -19,7 +19,7 @@ export default function Home() {
               Your phone is your gate remote.
             </h1>
             <p className="text-lg text-[var(--color-warmgray)] max-w-lg mb-8 leading-relaxed">
-              One tap opens your gate from up to 30 metres away. Works with any automated gate. Installs in about 10 minutes. No WiFi needed.
+              One tap opens your gate from up to 30 metres away. Works with most automated gates. DIY install in 10–15 minutes, or add professional installation. No WiFi needed.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <Link href="/pricing" className="btn-primary">Buy TapGate — €249</Link>
@@ -45,27 +45,85 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <p className="eyebrow mb-3">Installation</p>
           <h2 className="text-3xl md:text-5xl font-light tracking-tight text-[var(--color-charcoal)] mb-4">
-            From box to open gate in about 10 minutes.
+            How you&apos;ll install it
           </h2>
-          <p className="text-[var(--color-warmgray)] max-w-2xl mb-12 leading-relaxed">
-            Pop open your gate operator, find the trigger terminals, plug in TapGate. No drilling, no electrician.
+          <p className="text-[var(--color-warmgray)] max-w-2xl mb-10 leading-relaxed">
+            Most people handle it themselves. But if you&apos;d rather not open an electrical enclosure, we&apos;ve got you covered.
           </p>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-            {[
-              { step: "1", title: "Unbox TapGate", desc: "Everything you need is in the box." },
-              { step: "2", title: "Open your gate operator", desc: "Find the control panel — usually a plastic box near the motor." },
-              { step: "3", title: "Plug in two wires", desc: "Connect TapGate to the trigger terminals. Same ones your remote uses." },
-              { step: "4", title: "Tap to open", desc: "Open the app, tap the button, and your gate moves." },
-            ].map((s) => (
-              <div key={s.step} className="card border border-gray-100 text-center">
-                <div className="w-10 h-10 rounded-full bg-[var(--color-teal)] text-white flex items-center justify-center mx-auto mb-4 font-semibold">
-                  {s.step}
+          {/* Two install paths */}
+          <div className="grid md:grid-cols-2 gap-6 mb-12">
+            {/* DIY */}
+            <div className="card border-2 border-[var(--color-teal)] relative">
+              <span className="absolute -top-3 left-6 bg-[var(--color-teal)] text-white text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full">Most popular</span>
+              <div className="flex items-center gap-3 mb-4 mt-2">
+                <div className="w-10 h-10 rounded-xl bg-[var(--color-teal-muted)] text-[var(--color-teal)] flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" />
+                  </svg>
                 </div>
-                <h3 className="font-semibold text-[var(--color-charcoal)] mb-2">{s.title}</h3>
-                <p className="text-sm text-[var(--color-warmgray)]">{s.desc}</p>
+                <h3 className="text-xl font-semibold text-[var(--color-charcoal)]">Do it yourself</h3>
               </div>
-            ))}
+              <p className="text-[var(--color-warmgray)] leading-relaxed mb-4">
+                About 15 minutes for most gates. You&apos;ll need a screwdriver and 2 wires. We walk you through it in the app — photos of your gate operator, step-by-step guide, live chat if you get stuck.
+              </p>
+              <p className="text-sm font-medium text-[var(--color-charcoal)] mb-1">Best for:</p>
+              <ul className="text-sm text-[var(--color-warmgray)] space-y-1 mb-4">
+                <li>Confident DIYers</li>
+                <li>Modern gate operators with accessible terminals</li>
+                <li>Anyone comfortable opening an electrical enclosure</li>
+              </ul>
+              <div className="grid grid-cols-4 gap-3 mt-auto pt-4 border-t border-gray-100">
+                {[
+                  { step: "1", label: "Unbox" },
+                  { step: "2", label: "Open panel" },
+                  { step: "3", label: "Plug in" },
+                  { step: "4", label: "Tap & go" },
+                ].map((s) => (
+                  <div key={s.step} className="text-center">
+                    <div className="w-8 h-8 rounded-full bg-[var(--color-teal)] text-white flex items-center justify-center mx-auto mb-1 text-xs font-semibold">{s.step}</div>
+                    <p className="text-[10px] text-[var(--color-warmgray)]">{s.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Professional */}
+            <div className="card border border-gray-200">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-xl bg-[var(--color-teal-muted)] text-[var(--color-teal)] flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87" /><path d="M16 3.13a4 4 0 010 7.75" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-[var(--color-charcoal)]">Professional installation</h3>
+                  <span className="text-sm text-[var(--color-teal)] font-medium">€89 — coming soon</span>
+                </div>
+              </div>
+              <p className="text-[var(--color-warmgray)] leading-relaxed mb-4">
+                Not sure where to start? A certified installer comes to your home, handles everything, and shows you how to use the app. Usually scheduled within 3–5 days.
+              </p>
+              <p className="text-sm font-medium text-[var(--color-charcoal)] mb-1">Best for:</p>
+              <ul className="text-sm text-[var(--color-warmgray)] space-y-1 mb-4">
+                <li>Older or sealed gate operators</li>
+                <li>Homeowners who prefer hands-off</li>
+                <li>Anyone who&apos;s unsure about wiring</li>
+              </ul>
+              <Link href="/contact" className="btn-secondary text-sm w-full text-center">
+                Join the install waitlist
+              </Link>
+            </div>
+          </div>
+
+          {/* Video walkthrough placeholder */}
+          <div className="bg-[var(--color-charcoal)] rounded-2xl aspect-video max-w-3xl mx-auto flex items-center justify-center mb-10">
+            <div className="text-center text-white">
+              <svg viewBox="0 0 24 24" className="w-14 h-14 mx-auto mb-3 text-[var(--color-teal)]" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg>
+              <p className="text-sm text-gray-400">[Installation video walkthrough — 60-90 sec, filmed on a real gate]</p>
+            </div>
           </div>
 
           <div className="bg-[var(--color-teal-muted)] rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">

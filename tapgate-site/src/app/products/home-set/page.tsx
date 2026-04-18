@@ -254,6 +254,87 @@ export default function HomeSetPage() {
         </div>
       </section>
 
+      {/* ── What's in the box ─────────────────── */}
+      <section className="section bg-[var(--color-teal-muted)]">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
+          <div className="grid lg:grid-cols-3 gap-10">
+            <div>
+              <p className="eyebrow mb-3">What&apos;s in the box</p>
+              <ul className="space-y-3">
+                {[
+                  "TapGate Gateway module",
+                  "2\u00d7 TapGate Fob (NFC keyring)",
+                  "1\u00d7 TapGate Keypad (weatherproof, battery-powered)",
+                  "Pre-connected wires with labelled terminals",
+                  "Mounting hardware for Gateway and Keypad",
+                  "Quick-start guide + QR for app download",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-[var(--color-charcoal)]">
+                    <svg viewBox="0 0 24 24" className="w-5 h-5 shrink-0 text-[var(--color-teal)] mt-0.5" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className="eyebrow mb-3">What you&apos;ll need</p>
+              <ul className="space-y-3">
+                {[
+                  "A Phillips-head screwdriver",
+                  "Your gate operator model name",
+                  "10\u201315 minutes",
+                  "Your smartphone (iOS 14+ or Android 9+)",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-[var(--color-charcoal)]">
+                    <svg viewBox="0 0 24 24" className="w-5 h-5 shrink-0 text-[var(--color-teal)] mt-0.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10" /><path d="M8 12l2 2 4-4" />
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className="eyebrow mb-3">You won&apos;t need</p>
+              <ul className="space-y-3">
+                {[
+                  "An electrician",
+                  "WiFi at the gate",
+                  "Drilling",
+                  "To remove your existing remote",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-[var(--color-warmgray)]">
+                    <svg viewBox="0 0 24 24" className="w-5 h-5 shrink-0 text-red-400 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2">
+                      <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Reviews placeholder ───────────────── */}
+      <section className="section bg-white">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
+          <p className="eyebrow mb-3">Reviews</p>
+          <h2 className="text-3xl md:text-4xl font-light tracking-tight text-[var(--color-charcoal)] mb-6">
+            What owners are saying
+          </h2>
+          <div className="bg-gray-50 border border-dashed border-gray-300 rounded-2xl p-8 md:p-12 text-center">
+            <p className="text-[var(--color-warmgray)] mb-2">Reviews are coming soon.</p>
+            <p className="text-sm text-[var(--color-warmgray)]">
+              We&apos;re collecting genuine reviews from real TapGate owners. No fake reviews, no incentivised ratings. Check back soon, or{" "}
+              <Link href="/community" className="text-[var(--color-teal)] underline">join the community</Link> to be notified.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* ── Gateway downsell ──────────────────── */}
       <section className="section">
         <div className="mx-auto max-w-4xl px-5 md:px-8">

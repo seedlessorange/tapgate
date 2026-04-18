@@ -22,7 +22,7 @@ const defaultFAQ: FAQItem[] = [
   },
   {
     q: "Can I install it myself?",
-    a: "Yes. If you can use a screwdriver, you can install TapGate. Open your gate operator, find the two trigger terminals, connect TapGate's wires. Most people finish in under 10 minutes. We include a step-by-step guide.",
+    a: "Most people can — about 15 minutes with a screwdriver. The app walks you through it with photos for your specific gate. But if you're uncomfortable opening an electrical enclosure, or your gate operator is older or hard to access, we recommend professional installation (€89, coming soon). No shame in it — that's what it's for.",
   },
   {
     q: "What's the difference between TapGate and TapGate Cloud?",
@@ -31,6 +31,14 @@ const defaultFAQ: FAQItem[] = [
   {
     q: "What's your return policy?",
     a: "30-day returns, no questions asked. If TapGate doesn't work with your gate, send it back for a full refund including return shipping. We ship free within the EU.",
+  },
+  {
+    q: "My gate is a Somfy / Nice / CAME. They have their own smart module. Why choose TapGate?",
+    a: "Fair question. If you're happy being locked into one manufacturer's ecosystem, their native module is a reasonable choice — often cheaper too. TapGate makes sense if: you share access with a lot of people (our sharing features are richer), you want one app that works if you ever change gate brands, you have multiple gates of different brands, or you want features like scheduled access, activity logs, and single-use guest keys. If none of those apply, honestly, their module might be a better fit.",
+  },
+  {
+    q: "Does TapGate work with every gate?",
+    a: "No. TapGate works with automated gates that have a dry-contact trigger input — that's most modern residential gate operators. It doesn't work with manual gates (no motor), garage door openers, or very old operators without accessible trigger terminals. If your gate was installed before about 2005, check with us first. We'd rather tell you upfront than have you find out after buying.",
   },
 ];
 

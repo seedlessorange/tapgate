@@ -39,7 +39,7 @@ const KNOWN_BRANDS = BRANDS.filter((b) => b !== "Other / Unknown");
 
 /* ── Result logic ───────────────────────────────────────────────────────────── */
 
-type ResultKind = "compatible" | "likely" | "unsupported" | null;
+type ResultKind = "compatible" | "pro-install" | "likely" | "unsupported" | null;
 
 function getResult(
   gate: GateType | null,
@@ -53,6 +53,9 @@ function getResult(
 
   if (gate === "Garage" || remote === "No") return "unsupported";
   if (isDirectGate && isKnownBrand && remote === "Yes") return "compatible";
+  // Barrier, Other, unknown brand, or "Not sure" on remote — recommend pro install
+  if (gate === "Barrier" || gate === "Other") return "pro-install";
+  if (remote === "Not sure" || !isKnownBrand) return "pro-install";
   return "likely";
 }
 
@@ -278,6 +281,37 @@ export default function CompatibilityPage() {
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link href="/pricing" className="btn-primary">
+                      Buy TapGate &mdash; &euro;249
+                    </Link>
+                    <button onClick={reset} className="btn-secondary">
+                      Check another gate
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* Compatible but recommend professional install */}
+              {result === "pro-install" && (
+                <div className="card border-2 border-blue-400 bg-blue-50 text-center py-10">
+                  <div className="w-16 h-16 rounded-full bg-blue-500 text-white flex items-center justify-center mx-auto mb-5">
+                    <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" />
+                    </svg>
+                  </div>
+                  <h2 className="text-2xl font-semibold text-[var(--color-charcoal)] mb-2">
+                    Compatible &mdash; we recommend professional installation.
+                  </h2>
+                  <p className="text-[var(--color-warmgray)] mb-2">
+                    Your setup ({gateType?.toLowerCase()}, {brand}) should work with TapGate, but based on your answers, you&rsquo;ll likely have an easier time with a professional installer handling the wiring.
+                  </p>
+                  <p className="text-sm text-[var(--color-warmgray)] mb-8">
+                    Professional installation is €89 (coming soon). In the meantime, reach out and we&rsquo;ll help you decide.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <Link href="/contact" className="btn-primary">
+                      Get install help
+                    </Link>
+                    <Link href="/pricing" className="btn-secondary">
                       Buy TapGate &mdash; &euro;249
                     </Link>
                     <button onClick={reset} className="btn-secondary">

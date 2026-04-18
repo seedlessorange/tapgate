@@ -22,7 +22,9 @@ const cols = [
     title: "Resources",
     links: [
       { label: "Compatibility", href: "/compatibility" },
+      { label: "Is TapGate for you?", href: "/is-tapgate-for-you" },
       { label: "Support", href: "/support" },
+      { label: "Known limitations", href: "/support/limitations" },
       { label: "About us", href: "/about" },
       { label: "Contact", href: "/contact" },
     ],

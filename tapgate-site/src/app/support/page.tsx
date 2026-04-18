@@ -99,20 +99,71 @@ export default function SupportPage() {
         <FAQ />
       </div>
 
-      {/* Contact bar */}
+      {/* Known limitations link */}
+      <section className="section">
+        <div className="mx-auto max-w-3xl px-5 md:px-8">
+          <Link href="/support/limitations" className="card border border-gray-200 flex items-start gap-4 hover:border-[var(--color-teal)]/30 transition-colors group block">
+            <div className="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center shrink-0">
+              <svg viewBox="0 0 24 24" className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-[var(--color-charcoal)] group-hover:text-[var(--color-teal)] transition-colors">What TapGate doesn&apos;t do (yet)</h3>
+              <p className="text-sm text-[var(--color-warmgray)]">Honest list of current limitations so you know before you buy.</p>
+            </div>
+          </Link>
+        </div>
+      </section>
+
+      {/* Support channels */}
       <section className="section bg-[var(--color-teal-muted)]">
-        <div className="mx-auto max-w-3xl px-5 md:px-8 text-center">
-          <h2 className="text-2xl font-light tracking-tight text-[var(--color-charcoal)] mb-4">
-            Still stuck?
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
+          <p className="eyebrow mb-3">Get help</p>
+          <h2 className="text-2xl md:text-3xl font-light tracking-tight text-[var(--color-charcoal)] mb-8">
+            Multiple ways to reach us
           </h2>
-          <p className="text-[var(--color-warmgray)] mb-6">
-            Send us a message and we&apos;ll get back to you within one business day.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/contact" className="btn-primary">Contact Us</Link>
-            <a href="mailto:hello@tapgate.com" className="btn-secondary">
-              hello@tapgate.com
-            </a>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* FAQ */}
+            <div className="card border border-gray-100 text-center">
+              <div className="w-12 h-12 rounded-xl bg-[var(--color-teal-muted)] text-[var(--color-teal)] flex items-center justify-center mx-auto mb-3">
+                <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3" /><line x1="12" y1="17" x2="12.01" y2="17" /></svg>
+              </div>
+              <h3 className="font-semibold text-[var(--color-charcoal)] mb-1">FAQ</h3>
+              <p className="text-sm text-[var(--color-warmgray)] mb-3">Answers 70% of questions instantly.</p>
+              <a href="#faq" className="text-sm text-[var(--color-teal)] font-medium">Read FAQ &darr;</a>
+            </div>
+
+            {/* Live chat */}
+            <div className="card border border-gray-100 text-center">
+              <div className="w-12 h-12 rounded-xl bg-[var(--color-teal-muted)] text-[var(--color-teal)] flex items-center justify-center mx-auto mb-3">
+                <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" /></svg>
+              </div>
+              <h3 className="font-semibold text-[var(--color-charcoal)] mb-1">Live chat</h3>
+              <p className="text-sm text-[var(--color-warmgray)] mb-3">Mon–Fri, 9am–6pm CET. For install-day panic.</p>
+              <span className="text-sm text-[var(--color-warmgray)] italic">Coming soon</span>
+            </div>
+
+            {/* Email */}
+            <div className="card border border-gray-100 text-center">
+              <div className="w-12 h-12 rounded-xl bg-[var(--color-teal-muted)] text-[var(--color-teal)] flex items-center justify-center mx-auto mb-3">
+                <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22 6 12 13 2 6" /></svg>
+              </div>
+              <h3 className="font-semibold text-[var(--color-charcoal)] mb-1">Email support</h3>
+              <p className="text-sm text-[var(--color-warmgray)] mb-3">1-business-day response, guaranteed.</p>
+              <a href="mailto:hello@tapgate.com" className="text-sm text-[var(--color-teal)] font-medium">hello@tapgate.com</a>
+            </div>
+
+            {/* Video call */}
+            <div className="card border-2 border-[var(--color-teal)] text-center relative">
+              <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-[var(--color-teal)] text-white text-[10px] font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full">Premium</span>
+              <div className="w-12 h-12 rounded-xl bg-[var(--color-teal-muted)] text-[var(--color-teal)] flex items-center justify-center mx-auto mb-3 mt-1">
+                <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5"><polygon points="23 7 16 12 23 17 23 7" /><rect x="1" y="5" width="15" height="14" rx="2" ry="2" /></svg>
+              </div>
+              <h3 className="font-semibold text-[var(--color-charcoal)] mb-1">Video call install help</h3>
+              <p className="text-sm text-[var(--color-warmgray)] mb-3">€15 for 15 min. A real person walks you through it live.</p>
+              <Link href="/contact" className="text-sm text-[var(--color-teal)] font-medium">Book a call &rarr;</Link>
+            </div>
           </div>
         </div>
       </section>
