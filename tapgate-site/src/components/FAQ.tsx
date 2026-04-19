@@ -48,40 +48,54 @@ export default function FAQ({ items = defaultFAQ }: { items?: FAQItem[] }) {
   return (
     <section className="section" id="faq">
       <div className="mx-auto max-w-3xl px-5 md:px-8">
-        <p className="eyebrow mb-3">FAQ</p>
-        <h2 className="text-3xl md:text-4xl font-light tracking-tight text-[var(--color-charcoal)] mb-10">
-          Common questions
+        <p className="eyebrow mb-4">FAQ</p>
+        <h2 className="h2-section mb-12">
+          The <em>questions</em> every homeowner asks.
         </h2>
-        <div className="divide-y divide-gray-200">
-          {items.map((item, i) => (
-            <div key={i}>
-              <button
-                onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="w-full flex items-center justify-between py-5 text-left gap-4"
-                aria-expanded={openIndex === i}
-              >
-                <span className="text-lg font-medium text-[var(--color-charcoal)]">{item.q}</span>
-                <svg
-                  viewBox="0 0 24 24"
-                  className={`w-5 h-5 shrink-0 text-[var(--color-warmgray)] transition-transform duration-200 ${
-                    openIndex === i ? "rotate-180" : ""
-                  }`}
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
+        <div className="divide-y divide-[var(--color-hairline)]">
+          {items.map((item, i) => {
+            const panelId = `faq-panel-${i}`;
+            const buttonId = `faq-button-${i}`;
+            const isOpen = openIndex === i;
+            return (
+              <div key={i}>
+                <button
+                  id={buttonId}
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                  className="w-full flex items-center justify-between py-6 text-left gap-4 group"
+                  aria-expanded={isOpen}
+                  aria-controls={panelId}
                 >
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
-              </button>
-              <div
-                className={`overflow-hidden transition-all duration-300 ${
-                  openIndex === i ? "max-h-96 pb-5" : "max-h-0"
-                }`}
-              >
-                <p className="text-[var(--color-warmgray)] leading-relaxed">{item.a}</p>
+                  <span className="text-lg md:text-xl font-medium text-[var(--color-charcoal)] group-hover:text-[var(--color-teal)] transition-colors">
+                    {item.q}
+                  </span>
+                  <svg
+                    viewBox="0 0 24 24"
+                    className={`w-5 h-5 shrink-0 text-[var(--color-warmgray)] transition-transform duration-200 ${
+                      isOpen ? "rotate-180" : ""
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    aria-hidden
+                  >
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </button>
+                <div
+                  id={panelId}
+                  role="region"
+                  aria-labelledby={buttonId}
+                  hidden={!isOpen}
+                  className={`overflow-hidden transition-all duration-300 ${
+                    isOpen ? "max-h-96 pb-5" : "max-h-0"
+                  }`}
+                >
+                  <p className="text-[var(--color-warmgray)] leading-relaxed">{item.a}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

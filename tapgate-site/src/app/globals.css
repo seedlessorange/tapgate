@@ -1,31 +1,64 @@
 @import "tailwindcss";
 
 @theme inline {
+  /* Brand colors from apps/mobile/lib/design-tokens.ts: teal, teal-press,
+     teal-muted, charcoal, offwhite, warmgray, warmgray-light, hairline,
+     success. Web-only extensions below: teal-light/-dim/-glow for depth,
+     charcoal-soft for layered dark surfaces, paper for the subtle off-off
+     white used on section backgrounds. */
   --color-teal: #0E6D6B;
+  --color-teal-press: #0A5452;
   --color-teal-light: #2A9A9A;
   --color-teal-muted: #D4E8E7;
   --color-teal-dim: rgba(14, 109, 107, 0.15);
+  --color-teal-glow: rgba(14, 109, 107, 0.35);
   --color-charcoal: #0F1A1A;
+  --color-charcoal-soft: #1B2828;
   --color-offwhite: #F5F5F2;
+  --color-paper: #FBFBF8;
   --color-warmgray: #6B7280;
+  --color-warmgray-light: #9CA3AF;
+  --color-hairline: #E7E7E2;
   --color-success: #10B981;
 
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
-}
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-fraunces), "Instrument Serif", ui-serif, Georgia, serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
 
-/* ── Base ────────────────────────────────── */
+  --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-overshoot: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-decisive: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-short: 180ms;
+  --dur-base: 320ms;
+  --dur-long: 600ms;
+}
 
 html {
   scroll-behavior: smooth;
+  background: var(--color-offwhite);
 }
 
+/* Paper-grain ambient glow sits on a fixed-position pseudo to avoid
+   `background-attachment: fixed` repaint jank on long scroll. */
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-offwhite);
+  background: var(--color-offwhite);
   color: var(--color-charcoal);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1200px 600px at 85% -10%, rgba(14, 109, 107, 0.06), transparent 60%),
+    radial-gradient(800px 400px at -10% 110%, rgba(14, 109, 107, 0.05), transparent 60%);
 }
 
 ::selection {
@@ -33,24 +66,98 @@ body {
   color: white;
 }
 
-/* ── Typography helpers ──────────────────── */
+.font-serif-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
 
-.eyebrow {
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.h1-hero {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: clamp(2.75rem, 8vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  color: var(--color-charcoal);
+}
+
+.h1-hero em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.025em;
   color: var(--color-teal);
 }
 
-/* ── Pill buttons ────────────────────────── */
+.h2-section {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--color-charcoal);
+}
+
+.h2-section em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-teal);
+  letter-spacing: -0.015em;
+}
+
+.display-number {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(5rem, 14vw, 11rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--color-teal);
+  font-variant-numeric: tabular-nums;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-teal);
+}
+
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 1px;
+  background: var(--color-teal);
+}
+
+.eyebrow-vertical {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--color-teal);
+}
 
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.875rem 2rem;
+  padding: 0.9rem 1.75rem;
   background: var(--color-teal);
   color: white;
   font-weight: 600;
@@ -59,13 +166,23 @@ body {
   text-decoration: none;
   border: none;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  box-shadow: 0 1px 2px rgba(10, 84, 82, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transition: transform var(--dur-short) var(--ease-brand),
+              box-shadow var(--dur-base) var(--ease-brand),
+              background var(--dur-short) var(--ease-brand);
 }
 
 .btn-primary:hover {
-  background: var(--color-teal-light);
-  transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(14, 109, 107, 0.25);
+  background: var(--color-teal-press);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(14, 109, 107, 0.28),
+              0 2px 4px rgba(10, 84, 82, 0.25),
+              inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  transition-duration: var(--dur-short);
 }
 
 .btn-secondary {
@@ -73,51 +190,79 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.875rem 2rem;
+  padding: 0.9rem 1.75rem;
   background: transparent;
-  color: var(--color-teal);
+  color: var(--color-charcoal);
   font-weight: 600;
   font-size: 0.95rem;
   border-radius: 999px;
-  border: 2px solid var(--color-teal);
+  border: 1.5px solid var(--color-charcoal);
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: background var(--dur-short) var(--ease-brand),
+              color var(--dur-short) var(--ease-brand),
+              border-color var(--dur-short) var(--ease-brand);
 }
 
 .btn-secondary:hover {
-  background: var(--color-teal);
+  background: var(--color-charcoal);
   color: white;
 }
 
-/* ── Card surface ────────────────────────── */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0;
+  color: var(--color-teal);
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-teal);
+  transition: gap var(--dur-short) var(--ease-brand),
+              color var(--dur-short) var(--ease-brand);
+}
+
+.btn-ghost:hover {
+  gap: 0.75rem;
+  color: var(--color-charcoal);
+}
 
 .card {
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(15, 26, 26, 0.06);
+  border-radius: 16px;
+  box-shadow:
+    0 1px 2px rgba(15, 26, 26, 0.04),
+    0 4px 12px rgba(15, 26, 26, 0.04);
   padding: 2rem;
+  transition: transform var(--dur-base) var(--ease-brand),
+              box-shadow var(--dur-base) var(--ease-brand);
 }
 
-/* ── Focus visible for accessibility ─────── */
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 1px 2px rgba(15, 26, 26, 0.06),
+    0 12px 28px rgba(15, 26, 26, 0.08);
+}
 
 :focus-visible {
   outline: 2px solid var(--color-teal);
-  outline-offset: 2px;
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
-/* ── Reduced motion ──────────────────────── */
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--dur-long) var(--ease-brand),
+              transform var(--dur-long) var(--ease-brand);
 }
 
-/* ── Section spacing ─────────────────────── */
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 .section {
   padding: 5rem 0;
@@ -129,7 +274,32 @@ body {
   }
 }
 
-/* ── Form inputs ─────────────────────────── */
+/* `contain-intrinsic-size` keeps layout stable while `content-visibility`
+   lets the browser skip painting the marquee/pulse scenes when off-screen. */
+.off-screen-skip {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 400px;
+}
+
+.marquee {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  --marquee-duration: 40s;
+  mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+.marquee-track {
+  display: flex;
+  flex-shrink: 0;
+  gap: 3rem;
+  animation: marquee var(--marquee-duration) linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
 
 input[type="text"],
 input[type="email"],
@@ -138,14 +308,15 @@ input[type="url"],
 textarea,
 select {
   width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--color-hairline);
+  border-radius: 10px;
   font-family: inherit;
   font-size: 1rem;
   color: var(--color-charcoal);
   background: white;
-  transition: border-color 0.2s;
+  transition: border-color var(--dur-short) var(--ease-brand),
+              box-shadow var(--dur-short) var(--ease-brand);
 }
 
 input:focus,
@@ -153,10 +324,30 @@ textarea:focus,
 select:focus {
   outline: none;
   border-color: var(--color-teal);
-  box-shadow: 0 0 0 3px var(--color-teal-dim);
+  box-shadow: 0 0 0 4px var(--color-teal-dim);
 }
 
 textarea {
   resize: vertical;
   min-height: 100px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .marquee-track {
+    animation: none;
+  }
 }
